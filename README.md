@@ -27,6 +27,3 @@ A modern Recipe Discovery Web App built using React that allows users to explore
 - Animations: Framer Motion
 - Carousel: Splide.js
 - API: Spoonacular API
-1. Clone the repository
-```bash
-git clone https://github.com/your-username/cuisine-quest.git
