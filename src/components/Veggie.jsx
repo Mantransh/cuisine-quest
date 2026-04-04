@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/splide/dist/css/splide.min.css";
 import { Link } from "react-router-dom";
 
 function Veggie() {
@@ -27,58 +25,73 @@ function Veggie() {
   };
 
   return (
-    <div>
-      <Wrapper>
-        <h3>Our Vegetarian Picks</h3>
+    <Wrapper>
+      <h3>Our Vegetarian Picks</h3>
 
-        <Splide
-          options={{
-            perPage: 3,
-            arrows: false,
-            pagination: false,
-            drag: "free",
-            gap: "5rem",
-          }}
-        >
-          {veggie.map((recipe) => {
-            return (
-              <SplideSlide key={recipe.id}>
-                <Card>
-                  <Link to={"/recipe/" + recipe.id}>
-                    <p>{recipe.title}</p>
-                    <img src={recipe.image} alt={recipe.title} />
-                    <Gradient />
-                  </Link>
-                </Card>
-              </SplideSlide>
-            );
-          })}
-        </Splide>
-      </Wrapper>
-    </div>
+      <Grid>
+        {veggie.map((recipe) => (
+          <Card key={recipe.id}>
+            <Link to={"/recipe/" + recipe.id}>
+              <img src={recipe.image} alt={recipe.title} />
+              <Gradient />
+              <p>{recipe.title}</p>
+            </Link>
+          </Card>
+        ))}
+      </Grid>
+    </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  margin: 4rem 0rem;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 2rem auto;
   padding: 0 1rem;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    margin: 4rem auto;
+
+    h3 {
+      font-size: 2rem;
+    }
+  }
+`;
+
+const Grid = styled.div`
+  display: grid;
+
+  /* ✅ Same responsive layout */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Card = styled.div`
-  height: 12rem;
+  height: 8rem;
   border-radius: 1rem;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
+  background: #f0f0f0;
   transition: transform 0.2s ease-in-out;
 
   img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -87,35 +100,42 @@ const Card = styled.div`
   p {
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
     text-align: center;
-    font-size: 1.1rem;
+
+    font-size: 0.75rem;
     font-weight: 600;
     color: white;
-    padding: 1rem 0.75rem;
+
+    padding: 0.5rem;
     z-index: 3;
-    line-height: 1.3;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
   }
 
   &:hover {
     transform: scale(1.05);
   }
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
 `;
 
 const Gradient = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.2) 50%,
-    transparent 100%
+    rgba(0, 0, 0, 0.8),
+    transparent
   );
+
   z-index: 2;
 `;
 
