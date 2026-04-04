@@ -46,14 +46,16 @@ function Recipe() {
         {activeTab === "instructions" && (
           <RecipeInstructions>
             <h2>Summary</h2>
-            <RecipeInfo dangerouslySetInnerHTML={{ __html: details.summary }} />
 
-            <RecipeDescription>
-              {details.summary?.replace(/<[^>]+>/g, "")}
-            </RecipeDescription>
+            {/* ✅ Only ONE summary now */}
+            <RecipeInfo
+              dangerouslySetInnerHTML={{ __html: details.summary }}
+            />
 
             <h2>Instructions</h2>
-            <div dangerouslySetInnerHTML={{ __html: details.instructions }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: details.instructions }}
+            />
           </RecipeInstructions>
         )}
 
@@ -76,12 +78,12 @@ const DetailWrapper = styled.div`
   margin-top: 2rem;
   margin-bottom: 2rem;
   display: flex;
-  flex-direction: column; /* ✅ mobile first */
+  flex-direction: column;
   gap: 2rem;
   padding: 0 1rem;
 
   @media (min-width: 768px) {
-    flex-direction: row; /* ✅ desktop layout */
+    flex-direction: row;
     align-items: flex-start;
     padding: 0;
   }
@@ -114,7 +116,7 @@ const LeftSection = styled.div`
 `;
 
 const RecipeImage = styled.img`
-  width: 100%; /* ✅ responsive */
+  width: 100%;
   height: auto;
   max-height: 300px;
   object-fit: cover;
@@ -136,7 +138,7 @@ const Info = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  flex-wrap: wrap; /* ✅ prevents overflow */
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 `;
@@ -169,18 +171,6 @@ const RecipeTitle = styled.h1`
   @media (min-width: 768px) {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-  }
-`;
-
-const RecipeDescription = styled.p`
-  line-height: 1.6;
-  color: #555;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-
-  @media (min-width: 768px) {
-    font-size: 1rem;
-    margin-bottom: 2rem;
   }
 `;
 
